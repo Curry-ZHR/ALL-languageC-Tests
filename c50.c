@@ -16,3 +16,18 @@ int main(void)
         puts("0");
     return 0;
 }
+
+
+#include<stdio.h>
+int main(void)              /*第二题*/
+{
+    int i,j;
+    printf("请输入两门课的成绩:");
+    scanf("%d %d",%i,&j);
+    switch{
+    case i>=60,j>=60 : puts("it is pass");
+    case i<60||j<60 puts("it is no pass");
+    case i<0&&i>100 ||j<0&&j>100 puts("it is error");
+    }
+    return 0;
+}
