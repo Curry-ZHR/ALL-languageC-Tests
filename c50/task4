@@ -1,0 +1,23 @@
+#include<stdio.h>          /*用辗转相除法求最大公因数*/
+int main(void)
+{
+    int a,b;
+    puts("输入两个整数求他们的最大公因数。");
+    printf("整数1:");
+    scanf("%d",&a);
+    printf("整数2:");
+    scanf("%d",&b);
+    if (a>b){
+        for (a%b>0){
+            printf("%d",b);
+            putchar('/n');
+        }
+    }
+    else (a<b){
+        for (b%a>0){
+            printf("%d",a);
+            putchar('\n');
+        }
+    }
+        return 0;
+}
