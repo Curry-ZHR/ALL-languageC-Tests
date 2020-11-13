@@ -1,0 +1,25 @@
+#include<stdio.h>
+int main(void)         /*putchar*/
+{
+    int n;
+    int i;
+    int a[101];
+    int j;
+    int sum;      /*累乘 累加变量*/
+
+    scanf("%d",&n);
+    for (int i=0;i<n;i++){
+        scanf("%d",&a[i]);
+        sum=1;
+    }
+    for (int j=0;j<n;j++){
+        if ((a[j]%2)!=0){
+            sum=sum*a[j];
+        }
+        else continue;    /*继续循环*/
+                         /*如果数组a[i]某个元素是奇数，则将其累乘，如果不是，则继续循环*/
+
+    }
+    printf("%d",sum);
+    return 0;
+}
