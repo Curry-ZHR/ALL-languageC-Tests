@@ -1,0 +1,11 @@
+#include<stdio.h>            /*1~1100的素数 五个一行*/
+              /*怎么表达素数？*/
+int main(void)
+{
+    int a[100];
+    int i;
+    printf ("打印1~100以内的素数");
+        for (i=0;i<NUMBER;i++)
+            a[NUMBER]=1        /*把数组内所有元素初始化为1*/
+
+}
