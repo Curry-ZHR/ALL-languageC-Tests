@@ -1,0 +1,67 @@
+#include<stdio.h>
+#include<ctype.h>
+int put_stringr(const char s[]){
+    int i=0;
+    int cnt=0;
+    while (s[i]){
+        i++;
+        cnt++;
+    }
+    return cnt;
+}
+int main(void)
+{
+    int i,j;
+    int len;
+    char a[len/2+1];
+    if (len%2 == 1)
+        return false;
+    printf("请输入只包含"(" ")" "[" "]" "{" "}"的字符串：");
+    scanf("%s",&a[len/2+1]);
+    int i=0,j=0;
+    while (s[i]){
+        switch(s[i]){
+            case "(": ;
+            case "{": ;
+            case "[": {
+                a[j++]=s[i++];
+                if (j=len/2+1){
+                    return false;
+                }
+                break;
+       }
+            case ")":{
+            if (j=0 || a[j-1] != '('){
+                return false;
+            }
+            -- j;
+            ++ i;
+            break;
+                }
+            case "}":{
+            if (j == 0 || a[j-1] != '{'){
+                return false;
+            }
+            -- j;
+            ++ i;
+            break;
+            }
+            case "]": {
+            if (j == 0 ||a[j-1] != '['){
+                return false;
+            }
+            -- j;
+            ++ i;
+                }
+
+    }
+            if (j=0){
+                return true;
+            }
+            else {
+                return false;
+            }
+
+    }
+    return 0;
+}
