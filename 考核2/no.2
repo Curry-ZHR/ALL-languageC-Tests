@@ -1,0 +1,33 @@
+#include<stdio.h>
+int main(void)
+{
+    int a;
+    int n;
+    int i;
+    int j;
+    int v[1000];
+    printf("整数数组的元素个数为:",a);
+    scanf("%d",&a);
+    for (i=0;i<a;i++){
+        printf("nums=[%d]",v[i]);
+        scanf("%d",&v[i]);
+    }
+    printf("目标值target为：%d",n);
+    scanf("%d",&n);
+
+    for (i=0;i<a;i++){
+        for (j=0;j<a;j++){
+            if (nums[i]+nums[j] == n)
+        {
+        printf("[%d,%d]",i,j);
+        }
+            else
+        {
+        printf("\n");
+        }
+            }
+    }
+
+    return 0;
+}
+
