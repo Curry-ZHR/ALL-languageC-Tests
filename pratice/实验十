@@ -1,0 +1,150 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+// 主叫号码开头 0 国际 1 国内 2 市话 
+
+/*
+2017 6 6  02767862101 02768790908 10 20 50 10 24 30
+2017 6 6  02767862101 02768790908 11 10 30 11 50 20
+2017 6 6  02767862101 02768790908 9  55 22 10 06 30
+2017 6 6  02767862101 02768790908 12 55 11 13 44 56
+2017 6 6  02767862101 02768790908 14 20 34 14 50 31
+2017 6 6  02767862101 02768790908 17 46 46 18 31 34
+*/
+struct date_Info
+{
+	int year;
+	int month;	//年 月 日 
+	int day;
+}date[6];
+typedef date_Info Date;
+
+struct time_Info
+{
+	int h;
+	int m;
+	int s;		//时 分 秒 
+}time[6][2];	//开始和结束时间
+typedef time_Info	Time;
+
+struct number_Info
+{
+	char calling[20];
+	char called[20];
+}call[6];
+typedef number_Info Number;
+
+int min(int i)	//统计分钟数 		i表示每一次通话记录 
+{
+	int min,tag=0,flag=0;
+	if(time[i][1].s<time[i][0].s)
+		tag=1;
+	if(time[i][1].m<time[i][0].m)
+		flag=1;
+	
+	min=(time[i][1].h-time[i][0].h)*60+(time[i][1].m-tag-time[i][0].m)+1;
+	return (min);
+ } 
+ 
+//一个i对应一个fare 
+int type(int i,struct number_Info call[])		//计算话费 
+{
+	int fare;
+	switch(call[i].calling[0])		//电话号码的第一个字符 
+	{
+		case '0':
+			fare=min(i)*1.00;
+			break;
+		case '1':
+			fare=min(i)*0.60;
+			break;
+		case '2':
+			if(min(i)<=3)
+				fare=min(i)*0.20;
+			else
+				fare=3*0.20+(min(i)-3)*0.10;
+			break;
+	}	
+	return 	fare;			//对话费取整数 
+}
+
+void swap1(Date *a,Date *b)
+{
+	Date temp1=*a;
+	*a=*b;
+	*b=temp1;
+}
+
+void swap2(Time *a,Time *b)
+{
+	Time temp2=*a;
+	*a=*b;
+	*b=temp2;
+}
+
+void swap3(Number *a,Number *b)
+{
+	Number temp3=*a;
+	*a=*b;
+	*b=temp3;
+}
+
+
+
+int main()
+{
+	int fare[6]={0};
+	int f1[6]={0};
+	int i,j,k;
+	
+	printf("依次输入日期 主叫号码 被叫号码 起始时间 结束时间\n");
+	for(i=0;i<6;i++)
+	{
+		scanf("%d%d%d",&date[i].year,&date[i].month,&date[i].day);
+		scanf("%s	",call[i].calling);	
+		scanf("%s	",call[i].called);
+		scanf("%d%d%d",&time[i][0].h,&time[i][0].m,&time[i][0].s);
+		scanf("%d%d%d",&time[i][1].h,&time[i][1].m,&time[i][1].s);
+	}
+	//开始统计每个话单的费用
+	for(i=0;i<6;i++)
+	{
+		fare[i]=type(i,call);
+		f1[i]=fare[i];
+	}
+	
+	//选择排序
+	for(i=0;i<5;i++)
+	{
+		k=i;
+		for(j=i+1;j<6;j++)
+			if(f1[j]>f1[k])	
+				k=j;
+		if(k!=i)
+		{
+			swap1(&date[i],&date[k]);		//一维数组 
+			swap2(&time[i][0],&time[k][0]);			
+			swap2(&time[i][1],&time[k][1]);
+			swap3(&call[i],&call[k]);		//一维数组 
+			int temp=f1[i];
+			f1[i]=f1[k];
+			f1[k]=temp;
+			}	
+	}
+	
+	printf("排序后:\n"); 
+	printf("   日期		主叫号码	被叫号码	起始时间	结束时间	话费\n");
+	for(i=0;i<6;i++)
+	{
+		printf("%4d-%2d-%2d	",date[i].year,date[i].month,date[i].day);
+		printf("%s	",call[i].calling);
+		printf("%s	",call[i].called);
+		printf("%02d:%02d:%02d	",time[i][0].h,time[i][0].m,time[i][0].s);
+		printf("%02d:%02d:%02d	",time[i][1].h,time[i][1].m,time[i][1].s);
+		printf("%d\n",f1[i]);
+	 } 
+	
+	
+	
+	return 0;
+}
